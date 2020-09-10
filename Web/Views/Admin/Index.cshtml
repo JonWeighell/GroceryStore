@@ -1,0 +1,67 @@
+﻿@using FruitSystem.Data.Classes
+@model List<Product>
+
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <h1>Product Admin</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th class="text-right">Price</th>
+                    <th class="text-right">Stock</th>
+                    <th class="text-right">Updated</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Any())
+                {
+                    foreach (Product product in Model)
+                    {
+                        <tr>
+                            <td>@product.Name</td>
+                            <td class="text-right">@product.Price.ToString("C")</td>
+                            <td class="text-right">@product.Stock</td>
+                            <td class="text-right">@product.UpdatedDated.ToShortDateString()</td>
+                            <td class="text-right"><a asp-action="Edit" asp-route-id="@product.Id" class="btn btn-secondary">Edit</a></td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4">No products - please upload a product CSV.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-4">
+        <form class="card" asp-action="Upload" enctype="multipart/form-data" method="post">
+            <div class="card-header">Upload Products</div>
+            <div class="card-body">
+                <div class="card-text">
+                    Please upload a CSV file containing new products.
+                </div>
+                <input type="file" name="file" class="mt-2" />
+            </div>
+            <div class="card-footer text-right">
+                <input type="submit" class="btn btn-primary" value="Upload" />
+            </div>
+        </form>
+
+        <div class="card mt-3">
+            <div class="card-header">Download Product CSV</div>
+            <div class="card-body text-right">
+                <a asp-action="Download" class="btn btn-primary mt-1">Download</a>
+            </div>
+        </div>
+    </div>
+</div>

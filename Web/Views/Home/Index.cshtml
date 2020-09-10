@@ -1,0 +1,43 @@
+﻿@using FruitSystem.Data.Classes
+@model List<Product>
+
+@{
+    ViewData["Title"] = "Our Products";
+}
+
+    <div class="row">
+        <div class="col-md-9">
+            <h1>Our Products</h1>
+            @if (Model.Any())
+            {
+                <div class="row">
+                    @foreach (Product product in Model)
+                    {
+                        <div class="col-md-4">
+                            <div class="product mb-4">
+                                <h3>@product.Name</h3>
+                                <span class="price">Price <strong>@product.Price.ToString("C")</strong></span>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info">Sorry, there's no products here for you to see yet - we'll upload some soon!</div>
+            }
+        </div>
+
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">
+                    Store Admin
+                </div>
+                <div class="card-body">                    
+
+                    <a class="btn btn-primary" asp-controller="Admin">Store Admin</a>
+                </div>
+            </div>
+        </div>
+
+    </div>

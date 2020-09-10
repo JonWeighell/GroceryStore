@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - Grocery Store</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="icon" type="image/svg+xml" href="~/images/banana.svg" />
+    </head>
+    <body>
+        <header>
+            <div class="container">            
+                <a class="navbar-brand p-3" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/banana.svg" /> Grocery<strong>Store</strong></a>
+            </div>
+        </header>
+        <div class="container">
+            <main role="main" class="p-3">
+                @if (TempData["Success"] != null)
+                {
+                    <div class="alert alert-success">@TempData["Success"]</div>
+                }
+
+                @if (TempData["Error"] != null)
+                {
+                    <div class="alert alert-danger">@TempData["Error"]</div>
+                }
+
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                Technical task submission to Landmark Solutions from <strong>Jonathan Weighell</strong>
+            </div>
+        </footer>
+        @RenderSection("Scripts", required: false)
+    </body>
+</html>
